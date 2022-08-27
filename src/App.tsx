@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react'
+import {Route, Routes} from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import AuthPage from "./pages/AuthPage";
+import AirportDetailPage from "./pages/AirportDetailPage";
+import Navigation from "./components/Navigation";
+import {fetchHandbooks} from "./store/actions/handbookAction";
+import {useAppDispatch} from "./hooks/redux";
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Navigation/>
+      <Routes>
+        <Route path="/" element={<MainPage/>}/>
+        <Route path="/auth" element={<AuthPage/>}/>
+        <Route path="/airport/:id" element={<AirportDetailPage/>}/>
+      </Routes>
+    </>
+  )
 }
 
-export default App;
+export default App
