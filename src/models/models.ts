@@ -39,3 +39,14 @@ export interface IDetailAirport {
   region: string
   type: string
 }
+
+export interface IAirportComment {
+  id: number
+  user: {
+    username: string
+    email: string
+  }
+  created: string
+  comment: string
+
+}
