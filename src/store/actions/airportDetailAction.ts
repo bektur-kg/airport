@@ -1,5 +1,5 @@
 import {AppDispatch} from "../index"
-import axios from "../../axios"
+import {instance} from "../../axios"
 import {airportDetailSlice} from "../slices/airportDetail"
 import {IDetailAirport} from "../../models/models"
 
@@ -9,7 +9,7 @@ export const fetchAirportDetail = (id: string) => {
     try {
       dispatch(airportDetailSlice.actions.fetching())
 
-      const response = await axios.get<IDetailAirport>(`/airports/${id}`)
+      const response = await instance.get<IDetailAirport>(`/airports/${id}`)
 
       dispatch(airportDetailSlice.actions.fetchSuccess(response.data))
 

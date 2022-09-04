@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {useAppDispatch, useAppSelector} from "../hooks/redux"
 import {fetchAirportComments, handleCommentSubmit} from "../store/actions/airportCommentsAction"
 import useInput from "../hooks/useInput"
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom"
 
 const Comments = ({id}: {id: string}) => {
   const {loading, data, error} = useAppSelector(state => state.airportComments)
@@ -10,6 +10,12 @@ const Comments = ({id}: {id: string}) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const comment = useInput('')
+
+  const createComment = async () => {
+    await dispatch(handleCommentSubmit(comment.value, id))
+    comment.setValue('')
+    dispatch(fetchAirportComments(id))
+  }
 
   useEffect(() => {
     dispatch(fetchAirportComments(id))
@@ -29,7 +35,7 @@ const Comments = ({id}: {id: string}) => {
           access ? (
             <button
               className="border px-3 py-1 bg-blue-500 text-white rounded mt-2"
-              onClick={() => dispatch(handleCommentSubmit(comment.value, id))}
+              onClick={createComment}
             >Submit</button>
           ) : (
             <button

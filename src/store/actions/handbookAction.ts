@@ -1,6 +1,6 @@
 import {AppDispatch} from "../index"
 import {handbookSlice} from "../slices/handbookSlice"
-import axios from "../../axios"
+import {instance} from "../../axios"
 import {AirportCountry, AirportRegion, AirportType} from "../../models/models"
 
 
@@ -12,9 +12,9 @@ export const fetchHandbooks = () => {
 
       const response = await Promise.all([
 
-        axios.get<AirportType[]>('handbooks/airport-types'),
-        axios.get<AirportRegion[]>('handbooks/regions'),
-        axios.get<AirportCountry[]>('handbooks/countries')
+        instance.get<AirportType[]>('handbooks/airport-types'),
+        instance.get<AirportRegion[]>('handbooks/regions'),
+        instance.get<AirportCountry[]>('handbooks/countries')
 
       ])
       dispatch(handbookSlice.actions.fetchingSuccess({

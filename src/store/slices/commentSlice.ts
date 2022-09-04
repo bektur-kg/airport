@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
-import {IAirportComment, IServerResponse} from "../../models/models";
+import {IAirportComment} from "../../models/models"
 
 interface ICommentSliceState {
   loading: boolean

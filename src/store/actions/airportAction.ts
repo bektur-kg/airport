@@ -1,4 +1,4 @@
-import axios from "../../axios"
+import {instance} from "../../axios"
 import {AppDispatch} from "../index"
 import {IAirport, IServerResponse} from "../../models/models"
 import {airportSlice} from "../slices/airportSlice"
@@ -9,7 +9,7 @@ export const fetchAirports = (page = 1, count = 50) => {
 
       dispatch(airportSlice.actions.fetching())
 
-      const response = await axios.get<IServerResponse<IAirport>>(
+      const response = await instance.get<IServerResponse<IAirport>>(
         'airports',
         { params: { count, page } }
       )

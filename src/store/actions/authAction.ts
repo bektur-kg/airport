@@ -1,5 +1,5 @@
 import {AppDispatch} from "../index"
-import axios from "../../axios"
+import {instance} from "../../axios"
 import {authSlice} from "../slices/authSlice"
 
 interface IResponseAuth {
@@ -18,11 +18,12 @@ export const register = (data: IAuthUserData) => {
 
     try {
 
-      const response = await axios.post<IResponseAuth>('/auth/register', data )
+      const response = await instance.post<IResponseAuth>('/auth/register', data )
 
       dispatch(authSlice.actions.login({
         username: data.username,
-        access: response.data.access
+        access: response.data.access,
+        refresh: response.data.refresh
       }))
 
     }catch (e) {
@@ -37,11 +38,12 @@ export const login = (data: IAuthUserData) => {
 
     try {
 
-      const response = await axios.post<IResponseAuth>('/auth/login', data )
+      const response = await instance.post<IResponseAuth>('/auth/login', data )
 
       dispatch(authSlice.actions.login({
         username: data.username,
-        access: response.data.access
+        access: response.data.access,
+        refresh: response.data.refresh
       }))
 
     }catch (e) {

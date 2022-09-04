@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import useInput from "../hooks/useInput";
-import {useDebounce} from "../hooks/useDebounce";
-import axios from "../axios";
-import {IAirport} from "../models/models";
-import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from 'react'
+import useInput from "../hooks/useInput"
+import {useDebounce} from "../hooks/useDebounce"
+import {instance} from "../axios"
+import {IAirport} from "../models/models"
+import {useNavigate} from "react-router-dom"
 
 const AirportSearch = () => {
   const input = useInput('')
@@ -12,7 +12,7 @@ const AirportSearch = () => {
   const debouncedValue = useDebounce<string>(input.value)
 
   const fetchAirports = async () => {
-    const response = await axios.get(
+    const response = await instance.get(
       'airports',
       {
         params: {name: debouncedValue, count: 7}
